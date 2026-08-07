@@ -1,4 +1,5 @@
-﻿using OpenCvSharp;
+﻿using Fish.Controller.Actions;
+using OpenCvSharp;
 
 namespace Fishmon.Controller;
 
@@ -103,7 +104,18 @@ internal static class Program
         {
             for(int col = 0; col < 3; col++)
             {
-                string label = labels[row, col];
+                FishAction action = FishActionMapper.GetActionFromZone(row,col);
+
+                string label;
+
+                if(action == FishAction.None)
+                {
+                    label = "IDLE";
+                }
+                else
+                {
+                    label = action.ToString().ToUpper();
+                }
 
                 int x = col * cellWidth + 15;
                 int y = row * cellHeight + 35;
