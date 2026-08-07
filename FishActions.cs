@@ -1,4 +1,4 @@
-namespace Fish.Controller.Actions;
+namespace Fishmon.Controller.Actions;
 
 
 public enum FishAction

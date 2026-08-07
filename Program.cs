@@ -1,5 +1,6 @@
-﻿using Fish.Controller.Actions;
+﻿using Fishmon.Controller.Actions;
 using OpenCvSharp;
+using Fishmon.Controller.Input;
 
 namespace Fishmon.Controller;
 
@@ -9,6 +10,23 @@ internal static class Program
 
     public static void Main()
     {
+
+        var controller = new WindowsGameController();
+
+        Console.WriteLine("Focus mGBA. Test begins in 3 seconds...");
+        Thread.Sleep(3000);
+
+        controller.Press(FishAction.Right);
+        Thread.Sleep(500);
+
+        controller.Press(FishAction.Right);
+        Thread.Sleep(500);
+
+        controller.Press(FishAction.Down);
+        Thread.Sleep(500);
+
+        controller.Press(FishAction.A);
+        Console.WriteLine("Input sent.");
         using var camera = new VideoCapture(0);
 
         if (!camera.IsOpened())
@@ -46,6 +64,10 @@ internal static class Program
             {
                 break;
             }
+
+
+
+
         }
         Cv2.DestroyAllWindows();
     }
