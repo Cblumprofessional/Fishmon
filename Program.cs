@@ -24,6 +24,13 @@ internal static class Program
 
         controller.Press(FishAction.Down);
         Thread.Sleep(500);
+    
+        controller.Press(FishAction.Start);
+        Thread.Sleep(500);
+
+        controller.Press(FishAction.B);
+        Thread.Sleep(500);
+
 
         controller.Press(FishAction.A);
         Console.WriteLine("Input sent.");

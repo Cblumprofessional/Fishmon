@@ -51,6 +51,9 @@ public class WindowsGameController
             case FishAction.A:
                 return 0x58; //X
 
+            case FishAction.B:
+                return 0x5A; //Z
+
             case FishAction.Start:
                 return 0x0D; //Enter
             
