@@ -1,40 +1,27 @@
 ﻿using Fishmon.Controller.Actions;
 using OpenCvSharp;
 using Fishmon.Controller.Input;
+using Fishmon.Controller.Detection;
+using Fishmon.Controller.Mapping;
+
 
 namespace Fishmon.Controller;
+
+
 
 internal static class Program
 {
     private const string WindowName = "Fishmon";
 
+    private const int CameraIndex = 1;
+
     public static void Main()
     {
+        
 
         var controller = new WindowsGameController();
-
-        Console.WriteLine("Focus mGBA. Test begins in 3 seconds...");
-        Thread.Sleep(3000);
-
-        controller.Press(FishAction.Right);
-        Thread.Sleep(500);
-
-        controller.Press(FishAction.Right);
-        Thread.Sleep(500);
-
-        controller.Press(FishAction.Down);
-        Thread.Sleep(500);
-    
-        controller.Press(FishAction.Start);
-        Thread.Sleep(500);
-
-        controller.Press(FishAction.B);
-        Thread.Sleep(500);
-
-
-        controller.Press(FishAction.A);
-        Console.WriteLine("Input sent.");
-        using var camera = new VideoCapture(0);
+        using var camera = new VideoCapture(CameraIndex);
+        var inputManager = new InputManager();
 
         if (!camera.IsOpened())
         {
@@ -61,7 +48,47 @@ internal static class Program
                 continue;
             }
 
+            Point? objectPosition = FishDetector.DetectRedObject(frame);
+
+
             DrawControllerGrid(frame);
+
+            if (objectPosition.HasValue)
+            {
+                Point center = objectPosition.Value;
+
+                FishAction action = ZoneMapper.GetActionFromPosition(
+                    center,
+                    frame.Width,
+                    frame.Height
+                );
+
+                Console.WriteLine($"Detected action: {action}");
+
+                if (inputManager.ShouldSendInput(action))
+                {
+                    Console.WriteLine($"Sending input: {action}");
+                    controller.Press(action);
+                }
+                Cv2.Circle(
+                    frame,
+                    center,
+                    10,
+                    Scalar.White,
+                    -1
+                );
+                
+
+                Cv2.PutText(
+                    frame,
+                    $"({center.X}, {center.Y})",
+                    new Point(center.X + 15, center.Y),
+                    HersheyFonts.HersheySimplex,
+                    0.6,
+                    Scalar.White,
+                    2
+                );
+            }
 
             Cv2.ImShow(WindowName, frame);
 
