@@ -3,7 +3,7 @@ using Fishmon.Controller.Actions;
 
 namespace Fishmon.Controller.Input;
 
-public class WindowsGameController
+public class WindowsGameController : IGameController
 {
     [DllImport("user32.dll")]
     private static extern void keybd_event(

@@ -19,9 +19,25 @@ internal static class Program
     {
         
 
-        var controller = new WindowsGameController();
         using var camera = new VideoCapture(CameraIndex);
         var inputManager = new InputManager();
+
+        IGameController controller;
+
+        if (OperatingSystem.IsWindows())
+        {
+            controller = new WindowsGameController();
+        }
+        else if (OperatingSystem.IsLinux())
+        {
+            controller = new LinuxGameController();
+        }
+        else
+        {
+            throw new PlatformNotSupportedException(
+                "Fishmon currently supports Windows and Linux."
+            );
+}
 
         if (!camera.IsOpened())
         {
