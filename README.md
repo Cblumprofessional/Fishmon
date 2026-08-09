@@ -12,7 +12,7 @@ The aquarium is divided into a 3x3 grid
 |LEFT | IDLE| RIGHT|
 | B | DOWN | SELECT |
 
-The 
+The layout can be changed easily
 
 Fishmon continously
 
