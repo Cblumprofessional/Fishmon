@@ -8,6 +8,7 @@ Fishmon tracks the fish and determines which region of the tank the fish is in. 
 
 The aquarium is divided into a 3x3 grid
 
+|---|---|---|
 | UP | A | START |
 |LEFT | IDLE| RIGHT|
 | B | DOWN | SELECT |
@@ -26,8 +27,10 @@ There is an input cooldown to prevent rapid inputs
 
 
 ##Requirements##
--.Net 8.0
--Webcam
--mGBA
--A GBA Pokemon Rom (Any GBA game could technically work. Would have to add the gba bumpers input and change the grid to support the bumpers.)
--A fish
+- .Net 8.0
+- Webcam
+- mGBA
+- A GBA Pokemon Rom 
+- A fish
+
+Any GBA game could technically work. Games that require the bumpers would require adding those inputs and changing the grid.
