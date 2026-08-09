@@ -4,7 +4,7 @@ Fishmon is a C# project that uses a camera to track a fish's position in an aqua
 
 Fishmon tracks the fish and determines which region of the tank the fish is in. Each region is mapped to an input in the MGBA emulator.
 
-##How it works
+## How it works
 
 The aquarium is divided into a 3x3 grid
 | | | | 
@@ -26,7 +26,7 @@ Fishmon continously
 There is an input cooldown to prevent rapid inputs
 
 
-##Requirements##
+## Requirements ##
 - .Net 8.0
 - Webcam
 - mGBA
