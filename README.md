@@ -7,8 +7,8 @@ Fishmon tracks the fish and determines which region of the tank the fish is in. 
 ##How it works
 
 The aquarium is divided into a 3x3 grid
-
-|---|---|---|
+| | | | 
+| --- | --- | --- |
 | UP | A | START |
 |LEFT | IDLE| RIGHT|
 | B | DOWN | SELECT |
