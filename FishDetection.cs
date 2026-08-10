@@ -15,11 +15,11 @@ public static class FishDetector{
         Cv2.CvtColor(Frame, hsv, ColorConversionCodes.BGR2HSV);
     // Red wraps around the HSV hue scale,
         // so we need two ranges.
-        Scalar lowerRed1 = new Scalar(0, 120, 70);
+        Scalar lowerRed1 = new Scalar(0, 70, 90);
         Scalar upperRed1 = new Scalar(10, 255, 255);
 
-        Scalar lowerRed2 = new Scalar(170, 120, 70);
-        Scalar upperRed2 = new Scalar(179, 255, 255);
+        Scalar lowerRed2 = new Scalar(170, 40, 20);
+        Scalar upperRed2 = new Scalar(180, 255, 255);
 
         Cv2.InRange(hsv, lowerRed1, upperRed1, mask1);
         Cv2.InRange(hsv, lowerRed2, upperRed2, mask2);

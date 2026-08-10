@@ -13,7 +13,7 @@ internal static class Program
 {
     private const string WindowName = "Fishmon";
 
-    private const int CameraIndex = 1;
+    private const int CameraIndex = 0;
 
     public static void Main()
     {
@@ -45,11 +45,48 @@ internal static class Program
             return;
         }
 
+/*
+	Console.WriteLine("Controller Testing in 5 seconds...");
+	Thread.Sleep(5000);
+	FishAction[] mp = 
+	{
+		FishAction.Up,
+		FishAction.Down,
+		FishAction.Left,
+		FishAction.Right,
+		FishAction.A,
+		FishAction.B,
+		FishAction.Start,
+		FishAction.Select
+	};
+
+	foreach(FishAction action in mp){
+		Console.WriteLine($"Sending {action} in 2 seconds...");
+		Thread.Sleep(2000);
+		controller.Press(action);
+		Console.WriteLine($"Send {action}");
+	}
+
+	Environment.Exit(0);
+	*/
+	
         //setting resolution to 1280 by 720 at 30fps, that is what the camera I bought supports
         //The camera used is EMEET C950 1080p webcam bought off Amazon
+	//
+	camera.Set(
+			VideoCaptureProperties.FourCC,
+			VideoWriter.FourCC('M', 'J', 'P', 'G'));
         camera.Set(VideoCaptureProperties.FrameWidth, 1280);
         camera.Set(VideoCaptureProperties.FrameHeight, 720);
         camera.Set(VideoCaptureProperties.Fps, 30);
+
+	Console.WriteLine(
+    		$"Resolution: {camera.FrameWidth}x{camera.FrameHeight}"
+	);
+
+	Console.WriteLine(
+   		 $"FPS: {camera.Fps}"
+	);
 
         using var frame = new Mat();
 
@@ -78,6 +115,10 @@ internal static class Program
                     frame.Width,
                     frame.Height
                 );
+
+		Console.WriteLine(
+    			$"Fish: ({center.X}, {center.Y}) | Zone: {action}"
+		);
 
                 Console.WriteLine($"Detected action: {action}");
 
@@ -115,7 +156,7 @@ internal static class Program
                 break;
             }
 
-
+		
 
 
         }
